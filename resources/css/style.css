@@ -45,3 +45,115 @@ body {
     float: left;
 }
 
+.scatter {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+
+@media screen and (max-width: 799px) {
+ aside {right: 0px;}
+ text {  font: 8px sans-serif; }
+ .year.label { font: 700 66px "Open Sans"; }
+	.chart {margin: 0px;}
+ .dotlabel#Maine { font: 11px sans-serif; z-index: 5000;}
+} 
+
+@media screen and (min-width: 800px) {
+ .chart {margin: 0px auto;}
+ aside {right: 150px;}
+ text {  font: 10px sans-serif; }
+ .year.label { font: 700 90px "Open Sans"; }
+} 
+svg {background: #fff;}
+
+p.slidesection {width: 100%; }
+
+.chartFixed {position: fixed; top: 0px; }
+.chatterFixed {position: fixed; top: 0px;}
+
+#mycontainer {width: 60%; margin-top: 1em;}
+
+aside {
+ font-size: 1em;
+ font-family: "Open sans",sans-serif;
+ text-align: center; 
+ position: fixed; 
+ bottom: 0px;
+ width: 100%;
+ background-color: rgba(255,255,255,0.8);
+}
+
+aside p.arrow {
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1em;
+	margin: 0px auto;
+	color: #222;
+	z-index: 9999999;
+	text-shadow: 0px 2px 2px #ddd;
+	width: 1em;
+	height: 1em;
+}
+
+aside p#down {
+    -ms-transform: scale(1,-1); /* IE 9 */
+    -webkit-transform:scale(1,-1); /* Chrome, Safari, Opera */
+    transform: scale(1,-1);
+}
+
+aside p#up {
+   opacity: 0;
+}
+
+.chart {    
+    max-width: 645px; 
+    z-index: 100;
+    width: 100%; 
+}
+
+.dot {
+  stroke: #fff;
+}
+
+.dotlabel {
+  text-anchor: right;
+}
+
+
+.label {
+  fill: #777;
+}
+
+.year.label {
+  fill: #ddd;
+  z-index: 1000;
+}
+
+.year.label.active {
+  fill: #aaa;
+}
+
+.fullpage-wrapper {z-index: 10;}
+
+.slider, .overlay {
+  fill: none;
+  pointer-events: all;
+  cursor: ew-resize;
+}
+
+text.dotlabel {
+	font-style:normal;
+	font-weight:normal;
+	paint-order: stroke;
+	fill:#000;
+	stroke:#fff;
+	stroke-width:2px;
+	stroke-linecap:butt;
+	stroke-linejoin:miter;
+	stroke-opacity:1;
+}
+
+#pagecontainer {min-height: 2000px;}
+
+
