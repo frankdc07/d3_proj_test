@@ -40,3 +40,8 @@ body {
 .stackedbch {
     float: right;
 }
+
+.parallel {
+    float: left;
+}
+
