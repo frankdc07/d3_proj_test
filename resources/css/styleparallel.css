@@ -160,17 +160,7 @@ text.dotlabel {
 #pagecontainer {min-height: 2000px;}
 
 
-
-
-
-svg {
-  font: 10px sans-serif;
-
-}
- svg {
-  font: 10px sans-serif;
-
-}
+=======
 .background path {
   fill: none;
   stroke: #ccc;
@@ -190,14 +180,10 @@ svg {
   shape-rendering: crispEdges;
 }
 
-.axis line,
-.axis path {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
 
 .axis text {
   text-shadow: 0 1px 0 #fff;
   cursor: move;
 }
+
+>>>>>>> 63f3133f9afc3a1b8042a8ce0256a5f8b031987c
