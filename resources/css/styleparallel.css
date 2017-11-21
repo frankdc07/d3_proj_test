@@ -21,7 +21,7 @@ body {
 }
 
 .x.axis path {
-  display: none;
+  display: inline-block;
 }
 
 .tooltip{
@@ -47,7 +47,7 @@ body {
     float: left;
 }
 
-<<<<<<< HEAD
+
 .scatter {
     text-align: center;
     margin-bottom: 100px;

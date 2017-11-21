@@ -21,7 +21,7 @@ body {
 }
 
 .x.axis path {
-  display: none;
+  display: inline-block;
 }
 
 .tooltip{
@@ -29,7 +29,7 @@ body {
   font-family: sans-serif;
   font-size: 10px;
   font-weight: bold;
-  /*fill:black; */
+  fill:black; 
 }
 
 .row {
@@ -47,7 +47,7 @@ body {
     float: left;
 }
 
-<<<<<<< HEAD
+
 .scatter {
     text-align: center;
     margin-bottom: 100px;
@@ -160,17 +160,6 @@ text.dotlabel {
 #pagecontainer {min-height: 2000px;}
 
 
-
-
-
-svg {
-  font: 10px sans-serif;
-
-}
- svg {
-  font: 10px sans-serif;
-
-}
 .background path {
   fill: none;
   stroke: #ccc;
