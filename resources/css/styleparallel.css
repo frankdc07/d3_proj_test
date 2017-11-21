@@ -51,6 +51,7 @@ body {
 .scatter {
     text-align: center;
     margin-bottom: 100px;
+    width: 100%;
 }
 
 
@@ -112,7 +113,7 @@ aside p#up {
 .chart {    
     max-width: 645px; 
     z-index: 100;
-    width: 100%; 
+    /*width: 100%;*/ 
 }
 
 .dot {
@@ -160,7 +161,6 @@ text.dotlabel {
 #pagecontainer {min-height: 2000px;}
 
 
-=======
 .background path {
   fill: none;
   stroke: #ccc;
@@ -186,4 +186,4 @@ text.dotlabel {
   cursor: move;
 }
 
->>>>>>> 63f3133f9afc3a1b8042a8ce0256a5f8b031987c
+

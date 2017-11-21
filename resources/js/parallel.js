@@ -17,12 +17,12 @@ var svgp = d3.select(".parallel").append("svg")
     .append("g")
     .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
-d3.csv("resources/data/cars.csv", function(error, cars) {
+function createParallelChart(data){
 
   // Extract the list of dimensions and create a scale for each.
-  xp.domain(dimensions = d3.keys(cars[0]).filter(function(d) {
-    return d != "name" && (yp[d] = d3.scale.linear()
-        .domain(d3.extent(cars, function(p) { return +p[d]; }))
+  xp.domain(dimensions = d3.keys(data[0]).filter(function(d) {
+    return d != "Municipio" && (yp[d] = d3.scale.linear()
+        .domain(d3.extent(data, function(p) { return +p[d]; }))
         .range([h, 0]));
   }));
 
@@ -30,7 +30,7 @@ d3.csv("resources/data/cars.csv", function(error, cars) {
   background = svgp.append("g")
       .attr("class", "background")
     .selectAll("path")
-      .data(cars)
+      .data(data)
     .enter().append("path")
       .attr("d", path);
 
@@ -38,9 +38,18 @@ d3.csv("resources/data/cars.csv", function(error, cars) {
   foreground = svgp.append("g")
       .attr("class", "foreground")
     .selectAll("path")
-      .data(cars)
+      .data(data)
     .enter().append("path")
       .attr("d", path);
+    
+    foreground.selectAll("path")
+    .on("mouseover", function (d){
+        svgp.append("text")
+          .attr("x",0)
+          .attr("y",0)
+          .attr("class","tooltip")
+          .text("delta");         
+    });
 
   // Add a group element for each dimension.
   var g = svgp.selectAll(".dimension")
@@ -90,7 +99,7 @@ d3.csv("resources/data/cars.csv", function(error, cars) {
     .selectAll("rect")
       .attr("x", -8)
       .attr("width", 16);
-});
+};
 
 function position(d) {
   var v = dragging[d];

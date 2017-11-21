@@ -17,7 +17,7 @@ var xScale = d3.scale.log().domain([100000, 40000000]).range([0, widthsc]),
 d3.json("resources/data/states.json", function(states) {
 
 	// Create the SVG container and set the origin.
-	var svg = d3.select(".chart").append("svg")
+	var svg = d3.select(".scatter").append("svg")
 					.attr("width", widthsc + marginsc.left + marginsc.right)
 					.attr("height", heightsc + marginsc.top + marginsc.bottom)
 			.append("g")

@@ -33,8 +33,7 @@ var legendClicked; //to control legend selections
 var legendClassArray = []; //store legend classes to select bars in plotSingle()
 var x_orig; //to store original y-posn
 
-d3.csv("resources/data/data.csv", function(error, data) {
-  if (error) throw error;
+function createStackedChart(data){
     
   console.log(data);
 
@@ -258,4 +257,4 @@ d3.csv("resources/data/data.csv", function(error, data) {
    
   } 
 
-});
+};
