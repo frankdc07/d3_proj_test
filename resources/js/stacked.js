@@ -11,7 +11,7 @@ var x = d3.scale.linear()
     .rangeRound([width, 0]);
 
 var color = d3.scale.ordinal()
-    .range(["#36670E", "#50901B", "#68A823", "#99C532"]);
+    .range(["#bfbf00", "#a9a900", "#949400", "#7f7f00", "#6a6a00"]);
 
 var xAxis = d3.svg.axis()
     .scale(x)
@@ -37,7 +37,7 @@ function createStackedChart(data){
     
   console.log(data);
 
-  color.domain(d3.keys(data[0]).filter(function(key) { return key !== "Municipio"; }));
+  color.domain(d3.keys(data[0]).filter(function(key) { return key !== "Municipio" && key !== "Anio"; }));
 
   data.forEach(function(d) {
     var mystate = d.Municipio; //add to stock code

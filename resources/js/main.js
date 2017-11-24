@@ -3,19 +3,11 @@
 d3.csv("resources/data/data.csv", function(error, data) {
   if (error) throw error;
     
-    var csData = crossfilter(data); 
+    var filteredData = data.filter(function(d) { return d.Anio == "2006"; }); 
     
-    var dimMun = csData.dimension(function (d){
-        return d.Municipio;
-    });
+    createParallelChart(filteredData);
     
-    dimMun.filter("AL");
-    
-    console.log("hola" + dimMun);
-    
-    createParallelChart(data);
-    
-    createStackedChart(data);    
+    createStackedChart(filteredData);    
     
     
 });

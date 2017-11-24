@@ -21,7 +21,7 @@ function createParallelChart(data){
 
   // Extract the list of dimensions and create a scale for each.
   xp.domain(dimensions = d3.keys(data[0]).filter(function(d) {
-    return d != "Municipio" && (yp[d] = d3.scale.linear()
+    return d != "Municipio" && d != "Anio" && (yp[d] = d3.scale.linear()
         .domain(d3.extent(data, function(p) { return +p[d]; }))
         .range([h, 0]));
   }));
