@@ -2,19 +2,19 @@
 function xsc(d) { return d.Deforestacion; }
 function ysc(d) { return d.Cultivos_ilicitos; }
 function colorsc(d) { return d.Region; }
-function key(d) { return d.municipio; }
+function key(d) { return d.Municipio; }
 
 // Chart dimensions.
 var marginsc = {top: 19.5, right: 4, bottom: 19.5, left: 42},
-    widthsc = 645 - marginsc.right - marginsc.left,
-    heightsc = 420 - marginsc.top - marginsc.bottom;
+    widthsc = 600 - marginsc.right - marginsc.left,
+    heightsc = 450 - marginsc.top - marginsc.bottom;
    
 // Various scales. These domains make assumptions of data, naturally.
-var xScale = d3.scale.log().domain([1000, 100000]).range([0, widthsc]),
+var xScale = d3.scale.linear().domain([0, 100000]).range([0, widthsc]),
     yScale = d3.scale.linear().domain([0, 100000]).range([heightsc, 0]),
     colorScale = d3.scale.category10();
 
-d3.json("resources/data/data2.json", function(municipios) {
+d3.json("resources/data/data2.json", function(Municipios) {
 
 	// Create the SVG container and set the origin.
 	var svg = d3.select(".scatter").append("svg")
@@ -24,7 +24,7 @@ d3.json("resources/data/data2.json", function(municipios) {
 					.attr("transform", "translate(" + marginsc.left + "," + marginsc.top + ")");
 
 	// The x & y axes.
-	var xAxis = d3.svg.axis().orient("bottom").scale(xScale).ticks(5, d3.format(",d")),
+	var xAxis = d3.svg.axis().orient("bottom").scale(xScale),
 					yAxis = d3.svg.axis().scale(yScale).orient("left");
 
 	// Add the x-axis.
@@ -62,18 +62,18 @@ d3.json("resources/data/data2.json", function(municipios) {
 					.attr("text-anchor", "end")
 					.attr("y", heightsc - 24)
 					.attr("x", widthsc)
-					.text(1950);
+					.text(2005);
 
 	var bisect = d3.bisector(function(d) { return d[0]; });
 
-	// Add a dot per municipio. Initialize the data at 1950, and set the colors.
+	// Add a dot per Municipio. Initialize the data at 1950, and set the colors.
 	var dot = svg.append("g")
 					.attr("class", "dots")
 			.selectAll(".dot")
 					.data(interpolateData(2005))
 			.enter().append("circle")
 					.attr("class", "dot")
-					.attr("id", function(d) { return d.municipio; })
+					.attr("id", function(d) { return d.Municipio; })
 					.style("fill", function(d) { return colorScale(colorsc(d)); })
 					.call(position);
 
@@ -84,14 +84,14 @@ d3.json("resources/data/data2.json", function(municipios) {
 					.data(interpolateData(2005))
 			.enter().append("text")
 					.attr("class", "dotlabel")
-					.attr("id", function(d) { return d.municipio; })
+					.attr("id", function(d) { return d.Municipio; })
 					.attr("text-anchor", "end")
-					.text(function(d) { return d.municipio; })
+					.text(function(d) { return d.Municipio; })
 					.call(positionlabel);
 
 	// Add a title.
 	dot.append("title")
-				.text(function(d) { return d.municipio; });
+				.text(function(d) { return d.Municipio; });
 
 	// Add an overlay for the year label.
 	var box = label.node().getBBox();
@@ -106,7 +106,7 @@ d3.json("resources/data/data2.json", function(municipios) {
 	
 	var startingTranstion =	svg.transition()
 					.delay(500)
-					.duration(6000)
+					.duration(25000)
 					.ease("easePolyOut")
 					.tween("year", tweenYear)
 					.each("end", enableInteraction);
@@ -115,13 +115,13 @@ d3.json("resources/data/data2.json", function(municipios) {
 	function position(dot) {
 			dot.attr("cx", function(d) { return xScale(xsc(d)); })
 						.attr("cy", function(d) { return yScale(ysc(d)); })
-						.attr("r", function(d) {return (d.municipio === "Maine") ? 8 : 3});
+						.attr("r", 5);
 	}
 
 	function positionlabel(dot) {
 			dot.attr("x", function(d) { return xScale(xsc(d)); })
 						.attr("y", function(d) { return yScale(ysc(d)); })
-						.attr("dx", function(d) { return (d.municipio === "Maine") ? -10 : -5 } )
+						.attr("dx",  -5 )
 						.attr("dy", 4 );
 	}
 
@@ -151,7 +151,7 @@ d3.json("resources/data/data2.json", function(municipios) {
 			}
 
 			function mousemove() {
-					displayYear(Math.round(yearScale.invert(d3.mouse(this)[0])/10)*10);
+					displayYear(Math.round(yearScale.invert(d3.mouse(this)[0])));
 			}
 	}
 
@@ -166,14 +166,14 @@ d3.json("resources/data/data2.json", function(municipios) {
 	function displayYear(year) {
 			dot.data(interpolateData(year), key).call(position);
 			dotlabel.data(interpolateData(year), key).call(positionlabel);
-			label.text(Math.round(year/10) * 10);
+			label.text(Math.round(year));
 	}
 
 	// Interpolates the dataset for the given (fractional) year.
 	function interpolateData(year) {
-			return municipios.map(function(d) {
+			return Municipios.map(function(d) {
 					return {
-							municipio: d.municipio,
+							Municipio: d.Municipio,
 							Region: d.Region,
 							Deforestacion: interpolateValues(d.Deforestacion, year),
 							Cultivos_ilicitos: interpolateValues(d.Cultivos_ilicitos, year)

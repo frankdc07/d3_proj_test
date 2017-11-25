@@ -37,18 +37,8 @@ body {
     margin: 0 auto;
 }
 
-.stackedbch {
-    width: 50%;
-    float: left;
-}
-
-.parallel {
-    width:50%;
-    float: left;
-}
-
-
 .scatter {
+  overflow: visible;
     text-align: center;
     margin-bottom: 100px;
 }
