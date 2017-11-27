@@ -34,15 +34,13 @@ var legendClassArray = []; //store legend classes to select bars in plotSingle()
 var x_orig; //to store original y-posn
 
 function createStackedChart(data){
-    
-  console.log(data);
 
   color.domain(d3.keys(data[0]).filter(function(key) { return key !== "Municipio" && key !== "Anio"; }));
 
   data.forEach(function(d) {
-    var mystate = d.Municipio; //add to stock code
+    var mydpto = d.Municipio; //add to stock code
     var x0 = 0;
-    d.ages = color.domain().map(function(name) { return {mystate:mystate, name: name, x0: x0, x1: x0 += +d[name]}; });
+    d.ages = color.domain().map(function(name) { return {mydpto:mydpto, name: name, x0: x0, x1: x0 += +d[name]}; });
     d.total = d.ages[d.ages.length - 1].x1;
 
   });
@@ -66,13 +64,13 @@ function createStackedChart(data){
       .style("text-anchor", "end");
       //.text("Population");
 
-  var state = svg.selectAll(".state")
+  var dpto = svg.selectAll(".dpto")
       .data(data)
     .enter().append("g")
       .attr("class", "g")
       .attr("transform", "translate(0,0)"); 
 
-  state.selectAll("rect")
+  dpto.selectAll("rect")
       .data(function(d) {
         return d.ages; 
       })
@@ -80,7 +78,7 @@ function createStackedChart(data){
       .attr("height", y.rangeBand())
       .attr("x", function(d) { return x(d.x0); })
       .attr("y",function(d) { //add to stock code
-          return y(d.mystate)
+          return y(d.mydpto)
         })
       .attr("width", function(d) { return x(d.x1) - x(d.x0); })
       .attr("class", function(d) {
@@ -89,7 +87,7 @@ function createStackedChart(data){
       })
       .style("fill", function(d) { return color(d.name); });
 
-  state.selectAll("rect")
+  dpto.selectAll("rect")
        .on("mouseover", function(d){
 
           var delta = d.x1 - d.x0;
@@ -129,7 +127,7 @@ function createStackedChart(data){
 
   legend.append("rect")
       .attr("x", width - 18)
-      .attr("y", 100)
+      .attr("y", 350)
       .attr("width", 18)
       .attr("height", 18)
       .style("fill", color)
@@ -188,14 +186,14 @@ function createStackedChart(data){
 
   legend.append("text")
       .attr("x", width - 24)
-      .attr("y", 109)
+      .attr("y", 359)
       .attr("dy", ".35em")
       .style("text-anchor", "end")
       .text(function(d) { return d; });
 
   function restorePlot(d) {
 
-    state.selectAll("rect").forEach(function (d, i) {      
+    dpto.selectAll("rect").forEach(function (d, i) {      
       //restore shifted bars to original posn
       d3.select(d[idx])
         .transition()
@@ -233,7 +231,7 @@ function createStackedChart(data){
 
     //lower the bars to start on y-axis
     x_orig = [];
-    state.selectAll("rect").forEach(function (d, i) {        
+    dpto.selectAll("rect").forEach(function (d, i) {        
     
       //get width and x posn of base bar and selected bar
       w_keep = d3.select(d[idx]).attr("width");
