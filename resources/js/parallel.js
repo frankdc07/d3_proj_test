@@ -1,6 +1,6 @@
 var m = [50, 10, 10, 10],
-    w = 500 - m[1] - m[3],
-    h = 500 - m[0] - m[2];
+    w = 20 - m[1] - m[3],
+    h = 20 - m[0] - m[2];
 
 var xp = d3.scale.ordinal().rangePoints([0, w], 1),
     yp = {},
